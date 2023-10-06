@@ -1,0 +1,138 @@
+@import url("reset.css");
+@import url("media-queries.css");
+
+:root {
+  font-size: 1em;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  --primary-color: rgb(252, 177, 58);
+  --secondary-color: rgb(91, 56, 30);
+  --link-color: rgb(229, 141, 0);
+  --background-color: rgb(246, 214, 162);
+  --text-primary-color: rgb(31, 31, 31);
+  --text-secondary-color: rgb(245, 244, 244);
+
+  --header-height: 3rem;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+main {
+  padding: 1rem;
+  flex: 1;
+}
+
+section {
+  margin: 1rem 0;
+}
+
+a {
+  color: var(--secondary-color);
+}
+
+a:hover {
+  color: var(--link-color);
+}
+
+p {
+  line-height: 1.2rem;
+}
+
+.main-header {
+  height: var(--header-height);
+  background-color: var(--primary-color);
+  padding: 0 0.5rem;
+}
+
+.main-header nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  margin-right: 0.5rem;
+  width: var(--header-height);
+  height: var(--header-height);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.button {
+  background-color: var(--secondary-color);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  color: var(--text-secondary-color);
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.button:hover {
+  color: var(--link-color);
+}
+
+footer {
+  background-color: var(--secondary-color);
+  color: var(--text-secondary-color);
+}
+
+.copyright-info {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+#newest-users-list {
+  list-style-type: decimal-leading-zero;
+}
+
+#newest-users-list li {
+  margin: 0.5rem 0 0.5rem 2rem;
+}
+
+#employee-search-label {
+  display: none;
+}
+
+.input-field {
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px solid #000;
+}
+
+.form {
+  margin: 0.5rem 0;
+}
+
+.button-under-text {
+  margin-top: 0.5rem;
+}
