@@ -1,0 +1,10 @@
+:root {
+  --primary-color: rgb(252, 177, 58);
+  --secondary-color: rgb(91, 56, 30);
+  --link-color: rgb(229, 141, 0);
+  --background-color: rgb(246, 214, 162);
+  --text-primary-color: rgb(31, 31, 31);
+  --text-secondary-color: rgb(255, 241, 201);
+
+  --header-height: 3rem;
+}

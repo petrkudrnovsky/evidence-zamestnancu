@@ -1,0 +1,14 @@
+.employee-detail-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+}
+
+.employee-detail-container .employee-detail-info {
+  border-radius: 1rem;
+}
+
+.employee-detail-container
+  section:first-child:not(.employee-detail-info section:first-child) {
+  margin: 0;
+}
