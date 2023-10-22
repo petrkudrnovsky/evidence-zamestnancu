@@ -1,0 +1,26 @@
+###> IDE files ###
+.idea
+
+###> GIT files in evza_app project ###
+evza_app/.git
+evza_app/.gitignore
+
+###> symfony/framework-bundle ###
+evza_app/.env.local
+evza_app/.env.local.php
+evza_app/.env.*.local
+evza_app/config/secrets/prod/prod.decrypt.private.php
+evza_app/public/bundles/
+evza_app/var/
+evza_app/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+evza_app/phpunit.xml
+evza_app.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> symfony/phpunit-bridge ###
+evza_app.phpunit.result.cache
+evza_app/phpunit.xml
+###< symfony/phpunit-bridge ###
