@@ -1,0 +1,17 @@
+.employee-list-img__container {
+  position: relative;
+  overflow: hidden;
+  display: none;
+}
+
+#employee-list li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.employee-list-info * {
+  line-height: 1.45rem;
+}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EVZA - Vítejte v aplikaci{% endblock %}
+
+{% block body %}
+    {% include 'components/header.html.twig' %}
+
+    <main>
+        <h1>Vítá Vás aplikace EVZA - Evidence zaměstnanců</h1>
+        <section>
+            <h2>Informace o aplikaci</h2>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. A laudantium pariatur rerum sequi nulla at nisi
+                ea
+                quo iusto ducimus asperiores aut laborum illum quibusdam saepe consequuntur id neque debitis, assumenda
+                rem
+                adipisci accusamus. Sunt facilis perspiciatis repellendus, similique nulla consectetur est et odio
+                doloremque voluptatibus ipsum ullam sapiente illum.</p>
+        </section>
+
+        <section class="search-section">
+            <h2>Vyhledat zaměstance</h2>
+            <form action="#" method="post" class="form">
+                <label for="employee-search" id="employee-search-label">Jméno zaměstnance</label>
+                <input type="text" placeholder="Jméno zaměstance..." name="employee-search" class="input-field">
+                <input type="submit" value="Hledat" class="button">
+            </form>
+            <p>Zobrazit všechny zaměstance <a href="#">zde</a>.</p>
+        </section>
+
+        <section>
+            <h2>Seznam nejnovějších zaměstnanců</h2>
+            <ol id="newest-users-list">
+                <li>
+                    <a href="#">Tomáš Marný</a>
+                </li>
+                <li>
+                    <a href="#">Světlana Břímková</a>
+                </li>
+            </ol>
+        </section>
+    </main>
+
+    {% include 'components/footer.html.twig' %}
+{% endblock %}

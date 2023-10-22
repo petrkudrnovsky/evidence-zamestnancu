@@ -1,0 +1,3 @@
+.account-list li:not(.account-list li:last-child) {
+  padding-bottom: 1rem;
+}
