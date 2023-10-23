@@ -24,17 +24,17 @@
                 <input type="text" placeholder="Jméno zaměstance..." name="employee-search" class="input-field">
                 <input type="submit" value="Hledat" class="button">
             </form>
-            <p>Zobrazit všechny zaměstance <a href="#">zde</a>.</p>
+            <p>Zobrazit všechny zaměstance <a href="{{ path('app_users_index') }}">zde</a>.</p>
         </section>
 
         <section>
             <h2>Seznam nejnovějších zaměstnanců</h2>
             <ol id="newest-users-list">
                 <li>
-                    <a href="#">Tomáš Marný</a>
+                    <a href="{{ path('app_user_detail', {id: 1}) }}">Ivan Němý</a>
                 </li>
                 <li>
-                    <a href="#">Světlana Břímková</a>
+                    <a href="{{ path('app_user_detail', {id: 2}) }}">Lilith Houdková</a>
                 </li>
             </ol>
         </section>

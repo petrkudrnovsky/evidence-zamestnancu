@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html lang="cs">
+{% extends 'base.html.twig' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style/general.css">
-    <link rel="icon" href="assets/icons/person-team.svg" type="image/svg+xml">
-    <title>EVZA - detail - Ivan Němý</title>
-</head>
+{% block title %}EVZA - detail - Ivan Němý{% endblock %}
 
-<body>
-    <header class="main-header">
-        <nav>
-            <a href="index.html.twig" class="logo">
-                <img src="assets/icons/person-team.svg" alt="Logo aplikace">
-                <span class="logo-text">EVZA</span>
-            </a>
-            <a href="#" class="login-link button">Přihlášení</a>
-        </nav>
-    </header>
+{% block body %}
+    {% include 'components/header.html.twig' %}
+
     <main>
         <h1>Ivan Němý</h1>
         <article class="employee-detail-container">
@@ -53,16 +39,11 @@
                         dignissimos ea tenetur officiis sunt.</p>
                 </section>
                 <section>
-                    <a href="detail-accounts.html" class="button">Zobrazit účty zaměstnance</a>
+                    <a href="{{ path('app_user_detail_accounts', {id: 1}) }}" class="button">Zobrazit účty zaměstnance</a>
                 </section>
             </article>
         </article>
     </main>
-    <footer>
-        <section class="copyright-info">
-            Copyright &copy; Petr Kudrnovský (kudrnpe3) BI-TWA, ČVUT FIT <time datetime="2023">2023</time>
-        </section>
-    </footer>
-</body>
 
-</html>
+    {% include 'components/footer.html.twig' %}
+{% endblock %}

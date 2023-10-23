@@ -98,7 +98,7 @@ p {
 }
 
 .button:hover {
-  color: var(--link-color);
+  color: var(--text-secondary-color);
 }
 
 footer {

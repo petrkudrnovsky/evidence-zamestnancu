@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html lang="cs">
+{% extends 'base.html.twig' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style/general.css">
-    <link rel="icon" href="assets/icons/person-team.svg" type="image/svg+xml">
-    <title>EVZA - přehled zaměstnanců</title>
-</head>
+{% block title %}EVZA - přehled zaměstnanců{% endblock %}
 
-<body>
-    <header class="main-header">
-        <nav>
-            <a href="index.html.twig" class="logo">
-                <img src="assets/icons/person-team.svg" alt="Logo aplikace">
-                <span class="logo-text">EVZA</span>
-            </a>
-            <a href="#" class="login-link button">Přihlášení</a>
-        </nav>
-    </header>
+{% block body %}
+    {% include 'components/header.html.twig' %}
+
     <main>
         <h1 class="">Přehled všech zaměstnanců</h1>
         <ul id="employee-list">
@@ -28,7 +14,7 @@
                         alt="Profilová fotka Ivana Němého" />
                 </div>
                 <div class="employee-list-info">
-                    <h2><a href="detail.html">Ivan Němý</a></h2>
+                    <h2><a href="{{ path('app_user_detail', {id: 1}) }}">Ivan Němý</a></h2>
                     <dl>
                         <dt>Pozice:</dt>
                         <dd>CEO of Acme</dd>
@@ -43,7 +29,7 @@
                         alt="Profilová fotka Lilith Houdkové" />
                 </div>
                 <div class="employee-list-info">
-                    <h2><a href="detail.html">Lilith Houdková</a></h2>
+                    <h2><a href="{{ path('app_user_detail', {id: 2}) }}">Lilith Houdková</a></h2>
                     <dl>
                         <dt>Pozice:</dt>
                         <dd>CFO of Acme</dd>
@@ -58,7 +44,7 @@
                         alt="Profilová fotka Jana Blahoslaveného" />
                 </div>
                 <div class="employee-list-info">
-                    <h2><a href="detail.html">Jan Blahoslavený</a></h2>
+                    <h2><a href="{{ path('app_user_detail', {id: 3}) }}">Jan Blahoslavený</a></h2>
                     <dl>
                         <dt>Pozice:</dt>
                         <dd>Junion Web Developer</dd>
@@ -69,11 +55,6 @@
             </li>
         </ul>
     </main>
-    <footer>
-        <section class="copyright-info">
-            Copyright &copy; Petr Kudrnovský (kudrnpe3) BI-TWA, ČVUT FIT <time datetime="2023">2023</time>
-        </section>
-    </footer>
-</body>
 
-</html>
+    {% include 'components/footer.html.twig' %}
+{% endblock %}
