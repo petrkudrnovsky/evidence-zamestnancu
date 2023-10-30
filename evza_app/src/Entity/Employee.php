@@ -30,7 +30,7 @@ class Employee
     #[ORM\Column(length: 1024, nullable: true)]
     private ?string $note = null;
 
-    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: EmployeeAccount::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Account::class, orphanRemoval: true)]
     private Collection $accounts;
 
     #[ORM\ManyToMany(targetEntity: Position::class, inversedBy: 'employees')]
@@ -115,14 +115,14 @@ class Employee
     }
 
     /**
-     * @return Collection<int, EmployeeAccount>
+     * @return Collection<int, Account>
      */
     public function getAccounts(): Collection
     {
         return $this->accounts;
     }
 
-    public function addAccount(EmployeeAccount $account): static
+    public function addAccount(Account $account): static
     {
         if (!$this->accounts->contains($account)) {
             $this->accounts->add($account);
@@ -132,7 +132,7 @@ class Employee
         return $this;
     }
 
-    public function removeAccount(EmployeeAccount $account): static
+    public function removeAccount(Account $account): static
     {
         if ($this->accounts->removeElement($account)) {
             // set the owning side to null (unless already changed)

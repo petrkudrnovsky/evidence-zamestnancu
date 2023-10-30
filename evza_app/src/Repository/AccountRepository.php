@@ -2,34 +2,36 @@
 
 namespace App\Repository;
 
-use App\Entity\EmployeeAccount;
+use App\Entity\Account;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<EmployeeAccount>
+ * @extends ServiceEntityRepository<Account>
  *
- * @method EmployeeAccount|null find($id, $lockMode = null, $lockVersion = null)
- * @method EmployeeAccount|null findOneBy(array $criteria, array $orderBy = null)
- * @method EmployeeAccount[]    findAll()
- * @method EmployeeAccount[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Account|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Account|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Account[]    findAll()
+ * @method Account[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EmployeeAccountRepository extends ServiceEntityRepository
+class AccountRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, EmployeeAccount::class);
+        parent::__construct($registry, Account::class);
     }
 
     public function getAccountsForUser(int $userId): array
     {
         $accounts = [
-            new EmployeeAccount()
+            new Account()
         ];
+
+        return $accounts;
     }
 
 //    /**
-//     * @return EmployeeAccount[] Returns an array of EmployeeAccount objects
+//     * @return Account[] Returns an array of Account objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -43,7 +45,7 @@ class EmployeeAccountRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?EmployeeAccount
+//    public function findOneBySomeField($value): ?Account
 //    {
 //        return $this->createQueryBuilder('e')
 //            ->andWhere('e.exampleField = :val')

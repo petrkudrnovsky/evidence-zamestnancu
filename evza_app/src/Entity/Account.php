@@ -2,14 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\EmployeeAccountRepository;
+use App\Repository\AccountRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EmployeeAccountRepository::class)]
-class EmployeeAccount
+#[ORM\Entity(repositoryClass: AccountRepository::class)]
+class Account
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     public int $id;
+
+    #[ORM\Column(length: 255)]
     private int $name;
+
+    #[ORM\Column(type: "datetime", nullable: true)]
     private ?\DateTime $expiration;
 
     #[ORM\ManyToOne(inversedBy: 'accounts')]

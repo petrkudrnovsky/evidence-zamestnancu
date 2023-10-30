@@ -10,7 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PositionRepository::class)]
 class Position
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     public int $id;
+
+    #[ORM\Column(length: 255)]
     private string $name;
 
     #[ORM\ManyToMany(targetEntity: Employee::class, mappedBy: 'positions')]
