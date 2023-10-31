@@ -20,7 +20,6 @@ final class Version20231030162921 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP SEQUENCE employee_account_id_seq CASCADE');
         $this->addSql('CREATE SEQUENCE account_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE account (id INT NOT NULL, employee_id INT NOT NULL, name INT NOT NULL, expiration TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_on_account_with_employee_id ON account (employee_id)');
@@ -54,7 +53,6 @@ final class Version20231030162921 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('DROP SEQUENCE account_id_seq CASCADE');
-        $this->addSql('CREATE SEQUENCE employee_account_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('ALTER TABLE account DROP CONSTRAINT FK_7D3656A48C03F15C');
         $this->addSql('ALTER TABLE employee_position DROP CONSTRAINT FK_D613B5328C03F15C');
         $this->addSql('ALTER TABLE employee_position DROP CONSTRAINT FK_D613B532DD842E46');
