@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AccountRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
@@ -14,21 +15,21 @@ class Account
     public ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?int $name = null;
+    private ?string $name = null;
 
     #[ORM\Column(type: "datetime", nullable: true)]
-    private ?\DateTime $expiration;
+    private ?DateTime $expiration;
 
     #[ORM\ManyToOne(inversedBy: 'accounts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $employee = null;
 
     /**
-     * @param int $name
-     * @param \DateTime|null $expiration
-     * @param Employee|null $employee
+     * @param string $name
+     * @param DateTime|null $expiration
+     * @param Employee $employee
      */
-    public function __construct(int $name, ?\DateTime $expiration, ?Employee $employee)
+    public function __construct(string $name, ?DateTime $expiration, Employee $employee)
     {
         $this->name = $name;
         $this->expiration = $expiration;
@@ -44,33 +45,33 @@ class Account
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getName(): int
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param int $name
+     * @param string $name
      */
-    public function setName(int $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiration(): ?\DateTime
+    public function getExpiration(): ?DateTime
     {
         return $this->expiration;
     }
 
     /**
-     * @param \DateTime|null $expiration
+     * @param DateTime|null $expiration
      */
-    public function setExpiration(?\DateTime $expiration): void
+    public function setExpiration(?DateTime $expiration): void
     {
         $this->expiration = $expiration;
     }
