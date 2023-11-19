@@ -21,6 +21,20 @@ class EmployeeRepository extends ServiceEntityRepository
         parent::__construct($registry, Employee::class);
     }
 
+    /**
+     * @param $count - amount of Employees
+     * @return Employee[]
+     */
+    public function getNewestEmployees($count): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.createdAt', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Employee[] Returns an array of Employee objects
 //     */

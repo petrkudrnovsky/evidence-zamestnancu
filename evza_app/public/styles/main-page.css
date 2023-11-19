@@ -29,14 +29,14 @@
   border: 1px solid #000;
 }
 
-#newest-users-list {
+#newest-employees-list {
   list-style-type: decimal-leading-zero;
 }
 
-#newest-users-list li {
+#newest-employees-list li {
   margin: 0.5rem 0 0.5rem 2rem;
 }
 
-#newest-users-list li:first-child {
+#newest-employees-list li:first-child {
   font-weight: 600;
 }

@@ -29,13 +29,12 @@
 
         <section>
             <h2>Seznam nejnovějších zaměstnanců</h2>
-            <ol id="newest-users-list">
+            <ol id="newest-employees-list">
+                {% for employee in newest_employees %}
                 <li>
-                    <a href="{{ path('app_user_detail', {id: 1}) }}">Ivan Němý</a>
+                    <a href="{{ path('app_user_detail', {id: employee.id}) }}">{{ employee.firstName }} {{ employee.secondName }}</a>
                 </li>
-                <li>
-                    <a href="{{ path('app_user_detail', {id: 2}) }}">Lilith Houdková</a>
-                </li>
+                {% endfor %}
             </ol>
         </section>
     </main>

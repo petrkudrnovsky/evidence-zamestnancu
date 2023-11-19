@@ -2,16 +2,31 @@
 
 namespace App\Controller;
 
+use App\Entity\Employee;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EmployeeController extends AbstractController
 {
+    private EntityManagerInterface $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     #[Route('/', name: 'app_index')]
     public function index(): Response
     {
-        return $this->render('pages/index.html.twig', []);
+        $repository = $this->em->getRepository(Employee::class);
+
+        $newestEmployees = $repository->getNewestEmployees(5);
+
+        return $this->render('pages/index.html.twig', [
+            'newest_employees' => $newestEmployees
+        ]);
     }
 
     #[Route('/users', name: 'app_users_index')]

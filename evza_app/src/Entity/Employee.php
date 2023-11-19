@@ -6,6 +6,7 @@ use App\Repository\EmployeeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
 class Employee
@@ -30,6 +31,9 @@ class Employee
     #[ORM\Column(length: 1024, nullable: true)]
     private ?string $note = null;
 
+    #[ORM\Column(type: "datetime")]
+    private ?DateTime $createdAt = null;
+
     #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Account::class, orphanRemoval: true)]
     private Collection $accounts;
 
@@ -38,6 +42,7 @@ class Employee
 
     public function __construct()
     {
+        $this->createdAt = new DateTime('now');
         $this->accounts = new ArrayCollection();
         $this->positions = new ArrayCollection();
     }
@@ -112,6 +117,14 @@ class Employee
         $this->note = $note;
 
         return $this;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getCreatedAt(): ?DateTime
+    {
+        return $this->createdAt;
     }
 
     /**
