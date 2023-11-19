@@ -5,18 +5,23 @@ services:
     environment:
       - TERM=xterm-256color
     build:
+      args:
+        - USER_ID=${UID:-1000}  # change default values (UID:-VALUE)
+        - GROUP_ID=${GID:-1000}
+        - USER_NAME=${USER_NAME:-petr}
+        - GROUP_NAME=${GROUP_NAME:-petr}
       context: docker
     ports:
       - "8080:8080"
     volumes:
       - .:/app
-    container_name: twa-symfony-app
+    container_name: twa-app
     depends_on:
       - database
 
   database:
     image: postgres:${POSTGRES_VERSION:-15}-alpine
-    container_name: twa-app-database
+    container_name: twa-database
     ports:
       - "5432:5432"
     environment:
@@ -28,6 +33,7 @@ services:
 
   adminer:
     image: adminer
+    container_name: twa-adminer
     ports:
       - "8081:8080"
     depends_on:
