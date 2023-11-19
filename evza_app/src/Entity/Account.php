@@ -11,10 +11,10 @@ class Account
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public int $id;
+    public ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private int $name;
+    private ?int $name = null;
 
     #[ORM\Column(type: "datetime", nullable: true)]
     private ?\DateTime $expiration;

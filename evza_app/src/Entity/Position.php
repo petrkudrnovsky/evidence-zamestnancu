@@ -13,10 +13,10 @@ class Position
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public int $id;
+    public ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private string $name;
+    private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Employee::class, mappedBy: 'positions')]
     private Collection $employees;

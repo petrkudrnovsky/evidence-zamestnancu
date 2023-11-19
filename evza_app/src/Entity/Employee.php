@@ -13,13 +13,13 @@ class Employee
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public int $id;
+    public ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private string $firstName;
+    private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
-    private string $secondName;
+    private ?string $secondName = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $phoneNumber = null;
