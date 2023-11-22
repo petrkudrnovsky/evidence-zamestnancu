@@ -6,6 +6,9 @@ RUN apt-get -y update && apt-get -y upgrade && \
     LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php && \
     apt-get -y update && apt-get -y install php8.2 zip php-xml php-mbstring php-intl php-pgsql
 
+# install git
+RUN apt-get -y install git
+
 # install composer
 RUN curl -fsLS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer --version=2.6.5
 
