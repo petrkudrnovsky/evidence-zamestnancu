@@ -24,7 +24,7 @@
                 <input type="text" placeholder="Jméno zaměstance..." name="employee-search" class="input-field">
                 <input type="submit" value="Hledat" class="button">
             </form>
-            <p>Zobrazit všechny zaměstance <a href="{{ path('app_users_index') }}">zde</a>.</p>
+            <p>Zobrazit všechny zaměstance <a href="{{ path('app_employees_index') }}">zde</a>.</p>
         </section>
 
         <section>
@@ -32,7 +32,7 @@
             <ol id="newest-employees-list">
                 {% for employee in newest_employees %}
                 <li>
-                    <a href="{{ path('app_user_detail', {id: employee.id}) }}">{{ employee.firstName }} {{ employee.secondName }}</a>
+                    <a href="{{ path('app_employee_detail', {id: employee.id}) }}">{{ employee.firstName }} {{ employee.secondName }}</a>
                 </li>
                 {% endfor %}
             </ol>

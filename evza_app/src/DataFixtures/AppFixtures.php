@@ -36,7 +36,7 @@ class AppFixtures extends Fixture
             $employee->setNote($faker->optional(0.3)->sentence);
 
             // Assign positions to employees
-            $assignedPositions = $faker->randomElements($positions, rand(0, count($positions)));
+            $assignedPositions = $faker->randomElements($positions, rand(0, 3));
             foreach ($assignedPositions as $position) {
                 $employee->addPosition($position);
             }

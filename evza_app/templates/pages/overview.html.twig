@@ -6,53 +6,34 @@
     {% include 'components/header.html.twig' %}
 
     <main>
-        <h1 class="">Přehled všech zaměstnanců</h1>
+        <h1>Přehled všech zaměstnanců</h1>
         <ul id="employee-list">
+            {% for employee in employees %}
             <li>
                 <div class="employee-list-img__container">
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
-                        alt="Profilová fotka Ivana Němého" />
+                    <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+                        alt="Profilová fotka zaměstnance {{ employee.firstName }} {{ employee.secondName }}" />
                 </div>
                 <div class="employee-list-info">
-                    <h2><a href="{{ path('app_user_detail', {id: 1}) }}">Ivan Němý</a></h2>
+                    <h2><a href="{{ path('app_employee_detail', {id: employee.Id}) }}">{{ employee.firstName }} {{ employee.secondName }}</a></h2>
                     <dl>
                         <dt>Pozice:</dt>
-                        <dd>CEO of Acme</dd>
+                        <br>
+                        {% for position in employee.positions %}
+                            <dd class="employee-list-position">{{ position.name }}</dd>
+                        {% endfor %}
                         <dt>E-mail:</dt>
-                        <dd><a href="mailto:lilith.houdek@acme.com">lilith.houdek@acme.com</a></dd>
+                        <dd>
+                            {% if employee.email %}
+                                <a href="mailto:{{ employee.email }}">{{ employee.email }}</a>
+                            {% else %}
+                                Není zadán
+                            {% endif %}
+                        </dd>
                     </dl>
                 </div>
             </li>
-            <li>
-                <div class="employee-list-img__container">
-                    <img src="https://www.perfocal.com/blog/content/images/size/w960/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg"
-                        alt="Profilová fotka Lilith Houdkové" />
-                </div>
-                <div class="employee-list-info">
-                    <h2><a href="{{ path('app_user_detail', {id: 2}) }}">Lilith Houdková</a></h2>
-                    <dl>
-                        <dt>Pozice:</dt>
-                        <dd>CFO of Acme</dd>
-                        <dt>E-mail:</dt>
-                        <dd><a href="mailto:lilith.houdek@acme.com">lilith.houdek@acme.com</a></dd>
-                    </dl>
-                </div>
-            </li>
-            <li>
-                <div class="employee-list-img__container">
-                    <img src="https://media.istockphoto.com/id/1300512215/photo/headshot-portrait-of-smiling-ethnic-businessman-in-office.jpg?s=612x612&w=0&k=20&c=QjebAlXBgee05B3rcLDAtOaMtmdLjtZ5Yg9IJoiy-VY="
-                        alt="Profilová fotka Jana Blahoslaveného" />
-                </div>
-                <div class="employee-list-info">
-                    <h2><a href="{{ path('app_user_detail', {id: 3}) }}">Jan Blahoslavený</a></h2>
-                    <dl>
-                        <dt>Pozice:</dt>
-                        <dd>Junion Web Developer</dd>
-                        <dt>E-mail:</dt>
-                        <dd><a href="mailto:lilith.houdek@acme.com">lilith.houdek@acme.com</a></dd>
-                    </dl>
-                </div>
-            </li>
+            {% endfor %}
         </ul>
     </main>
 

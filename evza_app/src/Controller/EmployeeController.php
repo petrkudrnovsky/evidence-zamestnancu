@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Employee;
+use App\Repository\EmployeeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,18 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EmployeeController extends AbstractController
 {
-    private EntityManagerInterface $em;
-
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
-    }
-
+    /**
+     * @param EmployeeRepository $repository
+     * @return Response
+     */
     #[Route('/', name: 'app_index')]
-    public function index(): Response
+    public function index(EmployeeRepository $repository): Response
     {
-        $repository = $this->em->getRepository(Employee::class);
-
         $newestEmployees = $repository->getNewestEmployees(5);
 
         return $this->render('pages/index.html.twig', [
@@ -29,38 +25,40 @@ class EmployeeController extends AbstractController
         ]);
     }
 
-    #[Route('/users', name: 'app_users_index')]
-    public function listUsers(): Response
+    /**
+     * @param EmployeeRepository $repository
+     * @return Response
+     */
+    #[Route('/employees', name: 'app_employees_index')]
+    public function listAllEmployees(EmployeeRepository $repository): Response
     {
-        // get all Employees from EmployeeRepository
-        return $this->render('pages/overview.html.twig', []);
+        $allEmployees = $repository->findAll();
+        return $this->render('pages/overview.html.twig', [
+            'employees' => $allEmployees
+        ]);
     }
 
     /**
-     * @param int $id ID of the user
+     * @param int $id ID of the employee
+     * @param EmployeeRepository $repository
      * @return Response
      */
-    #[Route('/user/{id}', name: 'app_user_detail')]
-    public function showUserDetail(int $id): Response
+    #[Route('/employee/{id}', name: 'app_employee_detail')]
+    public function showUserDetail(int $id, EmployeeRepository $repository): Response
     {
-        // get Employee by ID
-        if($id == 1) {
-            return $this->render('pages/detail.html.twig', []);
-        }
-        else if($id == 2) {
-            return $this->render('pages/detail.html.twig', []);
-        }
-        else {
-            return $this->render('pages/error.html.twig', []);
-        }
+        $user = $repository->find($id);
+
+        return $this->render('pages/detail.html.twig', [
+            'user' => $user
+        ]);
     }
 
     /**
-     * @param int $id ID of the user
+     * @param int $id ID of the employee
      * @return Response
      */
-    #[Route('/user/{id}/accounts', name: 'app_user_detail_accounts')]
-    public function showUserAccounts(int $id): Response
+    #[Route('/employee/{id}/accounts', name: 'app_employee_detail_accounts')]
+    public function showEmployeeAccounts(int $id): Response
     {
         // get Accounts for user (and his ID)
         return $this->render('pages/detail-accounts.html.twig', []);

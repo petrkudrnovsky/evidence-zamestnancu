@@ -15,3 +15,7 @@
 .employee-list-info * {
   line-height: 1.45rem;
 }
+
+.employee-list-info dl .employee-list-position {
+  padding-left: 10px;
+}
