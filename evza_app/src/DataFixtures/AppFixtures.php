@@ -34,6 +34,7 @@ class AppFixtures extends Fixture
             $employee->setPhoneNumber($faker->optional(0.8)->phoneNumber);
             $employee->setEmail($faker->optional(0.8)->email);
             $employee->setNote($faker->optional(0.3)->sentence);
+            $employee->setActive($faker->boolean);
 
             // Assign positions to employees
             $assignedPositions = $faker->randomElements($positions, rand(0, 3));

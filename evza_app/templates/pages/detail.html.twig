@@ -1,45 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}EVZA - detail - Ivan Němý{% endblock %}
+{% block title %}EVZA - detail - {{ user.firstName }} {{ user.secondName }}{% endblock %}
 
 {% block body %}
     {% include 'components/header.html.twig' %}
 
     <main>
-        <h1>Ivan Němý</h1>
+        <h1>{{ user.firstName }} {{ user.secondName }}</h1>
         <article class="employee-detail-container">
             <section>
                 <div class="detail-img__container">
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" width="100px"
-                        alt="Profilová fotka Ivana Němého" />
+                    <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" width="100px"
+                        alt="Profilová fotka zaměstnance {{ user.firstName }} {{ user.secondName }}" />
                 </div>
             </section>
             <article class="employee-detail-info">
                 <section>
-                    <h2>Funkce:</h2>
+                    <h2>Pozice:</h2>
                     <ol class="general-list">
-                        <li>Generální ředitel Acme</li>
-                        <li>Vizionář</li>
+                        {% for position in user.positions %}
+                            <li>{{ position.name }}</li>
+                        {% endfor %}
                     </ol>
                 </section>
                 <section>
                     <h2>Kontaktní údaje:</h2>
                     <dl class="dl-with-icons">
                         <dt>Telefon: </dt>
-                        <dd><a href="tel:+420777777777" class="phone">+420 777 777 777</a></dd>
+                        {% if user.phoneNumber %}
+                            <dd><a href="tel:{{ user.phoneNumber }}" class="phone">{{ user.phoneNumber }}</a></dd>
+                        {% else %}
+                            <dd class="phone">Nezadáno</dd>
+                        {% endif %}
                         <dt>E-mail: </dt>
-                        <dd><a href="mailto:ivan.nemy@acme.com" class="email">ivan.nemy@acme.com</a></dd>
+                        {% if user.email %}
+                            <dd><a href="mailto:{{ user.email }}" class="email">{{ user.email }}</a></dd>
+                        {% else %}
+                            <dd class="email">Nezadáno</dd>
+                        {% endif %}
                     </dl>
                 </section>
                 <section>
-                    <h2>Poznámka</h2>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid labore culpa placeat neque
-                        nulla
-                        tempore
-                        dignissimos ea tenetur officiis sunt.</p>
+                    <h2>Status:
+                        {% if user.active %}
+                            <span class="status-label active">Aktivní</span>
+                        {% else %}
+                            <span class="status-label inactive">Neaktivní</span>
+                        {% endif %}
+                    </h2>
                 </section>
                 <section>
-                    <a href="{{ path('app_employee_detail_accounts', {id: 1}) }}" class="button">Zobrazit účty zaměstnance</a>
+                    <h2>Poznámka</h2>
+                    {% if user.note %}
+                        <p>{{ user.note }}</p>
+                    {% else %}
+                        <p>Nezadáno</p>
+                    {% endif %}
+                </section>
+                <section>
+                    <a href="{{ path('app_employee_detail_accounts', {id: user.id}) }}" class="button">Zobrazit účty zaměstnance</a>
                 </section>
             </article>
         </article>

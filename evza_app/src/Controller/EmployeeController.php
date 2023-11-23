@@ -55,12 +55,16 @@ class EmployeeController extends AbstractController
 
     /**
      * @param int $id ID of the employee
+     * @param EmployeeRepository $repository
      * @return Response
      */
     #[Route('/employee/{id}/accounts', name: 'app_employee_detail_accounts')]
-    public function showEmployeeAccounts(int $id): Response
+    public function showEmployeeAccounts(int $id, EmployeeRepository $repository): Response
     {
-        // get Accounts for user (and his ID)
-        return $this->render('pages/detail-accounts.html.twig', []);
+        $user = $repository->find($id);
+
+        return $this->render('pages/detail-accounts.html.twig', [
+            'user' => $user
+        ]);
     }
 }

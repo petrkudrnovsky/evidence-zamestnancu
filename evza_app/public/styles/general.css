@@ -199,6 +199,22 @@ footer {
   margin: 1rem 0;
 }
 
+.status-label {
+  padding: 1px 7px 4px 7px;
+  border-radius: 0.3rem;
+  font-weight: 600;
+}
+
+.active {
+  background-color: var(--success);
+  color: var(--text-secondary-color);
+}
+
+.inactive {
+  background-color: var(--danger);
+  color: var(--text-secondary-color);
+}
+
 @media screen and (min-width: 350px) {
   .search-section {
     padding: 2rem;

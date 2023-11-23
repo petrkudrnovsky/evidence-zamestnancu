@@ -18,7 +18,7 @@ class Account
     private ?string $name = null;
 
     #[ORM\Column(type: "datetime", nullable: true)]
-    private ?DateTime $expiration;
+    private ?DateTime $expiration = null;
 
     #[ORM\ManyToOne(inversedBy: 'accounts')]
     #[ORM\JoinColumn(nullable: false)]

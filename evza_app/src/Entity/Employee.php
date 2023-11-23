@@ -40,6 +40,12 @@ class Employee
     #[ORM\ManyToMany(targetEntity: Position::class, inversedBy: 'employees')]
     private Collection $positions;
 
+    #[ORM\Column]
+    private ?bool $active = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profilePhotoFilename = null;
+
     public function __construct()
     {
         $this->createdAt = new DateTime('now');
@@ -177,6 +183,30 @@ class Employee
     public function removePosition(Position $position): static
     {
         $this->positions->removeElement($position);
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): static
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    public function getProfilePhotoFilename(): ?string
+    {
+        return $this->profilePhotoFilename;
+    }
+
+    public function setProfilePhotoFilename(?string $profilePhotoFilename): static
+    {
+        $this->profilePhotoFilename = $profilePhotoFilename;
 
         return $this;
     }

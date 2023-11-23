@@ -6,5 +6,8 @@
   --text-primary-color: rgb(31, 31, 31);
   --text-secondary-color: rgb(255, 241, 201);
 
+  --success: rgb(50, 168, 82);
+  --danger: rgb(199, 14, 14);
+
   --header-height: 3rem;
 }
