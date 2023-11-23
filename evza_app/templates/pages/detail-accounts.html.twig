@@ -8,6 +8,8 @@
     <main>
         <h1>Detail účtů zaměstance - <strong class="bold-text">{{ user.firstName }} {{ user.secondName }}</strong></h1>
         <a href="{{ path('app_employee_detail', {id: user.id}) }}" class="button detail-account-button">Zpět na detail zaměstance</a>
+        <a href="{{ path('app_account_new', {employeeId: user.id}) }}" class="button detail-account-button">Vytvořit nový účet</a>
+
         <ul class="account-list">
             {% for account in user.accounts %}
                 <li>

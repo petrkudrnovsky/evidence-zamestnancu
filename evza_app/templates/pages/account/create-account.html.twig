@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EVZA - nový účet pro XXX{% endblock %}
+
+{% block body %}
+    {% include 'components/header.html.twig' %}
+        {{ form(form) }}
+    {% include 'components/footer.html.twig' %}
+{% endblock %}
