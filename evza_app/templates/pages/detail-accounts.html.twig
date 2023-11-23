@@ -9,33 +9,25 @@
         <h1>Detail účtů zaměstance - <strong class="bold-text">{{ user.firstName }} {{ user.secondName }}</strong></h1>
         <a href="{{ path('app_employee_detail', {id: user.id}) }}" class="button detail-account-button">Zpět na detail zaměstance</a>
         <ul class="account-list">
-            <li>
-                <h3>Účet v systému EVZA</h3>
-                <dl>
-                    <dt>Typ účtu:</dt>
-                    <dd>Systémový</dd>
-                    <dt>Expirace:</dt>
-                    <dd>Bez expirace</dd>
-                </dl>
-            </li>
-            <li>
-                <h3>Google Drive - Acme</h3>
-                <dl>
-                    <dt>Typ účtu:</dt>
-                    <dd>Systémový</dd>
-                    <dt>Expirace:</dt>
-                    <dd><time datetime="2025-07-08">8. července 2025</time></dd>
-                </dl>
-            </li>
-            <li>
-                <h3>Přístupová karta do kanceláře</h3>
-                <dl>
-                    <dt>Typ účtu:</dt>
-                    <dd>Systémový</dd>
-                    <dt>Expirace:</dt>
-                    <dd><time datetime="2025-02-12">12. února 2024</time></dd>
-                </dl>
-            </li>
+            {% for account in user.accounts %}
+                <li>
+                    <h3>Název účtu: {{ account.name }}</h3>
+                    <dl>
+                        <dt>Typ účtu</dt>
+                        {% if account.expiration %}
+                            <dd>Dočasný</dd>
+                        {% else %}
+                            <dd>Permanentní</dd>
+                        {% endif %}
+                        <dt>Expirace:</dt>
+                        {% if account.expiration %}
+                            <dd>{{ account.expiration|date("d. m. Y") }}</dd>
+                        {% else %}
+                            <dd>Bez expirace</dd>
+                        {% endif %}
+                    </dl>
+                </li>
+            {% endfor %}
         </ul>
     </main>
 

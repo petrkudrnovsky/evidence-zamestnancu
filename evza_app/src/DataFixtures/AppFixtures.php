@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
             }
 
             // Create accounts for each employee
-            for ($j = 0; $j < rand(0, 3); $j++) {
+            for ($j = 0; $j < rand(2, 3); $j++) {
                 $datetime = $faker->optional()->dateTimeBetween('now', '+1 year');
                 $account = new Account($faker->userName, $datetime != null ? $datetime->setTime(23, 59, 59) : $datetime, $employee);
                 $manager->persist($account);
