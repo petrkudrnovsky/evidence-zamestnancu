@@ -7,7 +7,6 @@ use App\Form\Model\AccountTypeModel;
 use App\Service\Account\AccountManager;
 use App\Service\Employee\EmployeeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccountController extends AbstractController
 {
     #[Route('/employee/{employeeId}/account/new', name: 'app_account_new')]
-    public function new(int $employeeId, Request $request, AccountManager $accountManager, EmployeeManager $employeeManager, FormFactoryInterface $formFactory): Response
+    public function new(int $employeeId, Request $request, AccountManager $accountManager, EmployeeManager $employeeManager): Response
     {
         $accountModel = new AccountTypeModel(null, null, null);
 
