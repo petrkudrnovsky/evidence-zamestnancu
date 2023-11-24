@@ -4,6 +4,9 @@
 
 {% block body %}
     {% include 'components/header.html.twig' %}
-        {{ form(form) }}
+        <main>
+            <h1>{{ heading }}</h1>
+            {{ form(form) }}
+        </main>
     {% include 'components/footer.html.twig' %}
 {% endblock %}
