@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Position;
 use App\Form\Model\EmployeeTypeModel;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -30,6 +32,14 @@ class EmployeeType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'E-mail',
                 'required' => false,
+            ])
+            ->add('positions', EntityType::class, [
+                'class' => Position::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => false,
+                'required' => false,
+                'label' => 'Pozice',
             ])
             ->add('note', TextType::class, [
                 'label' => 'Poznámka',

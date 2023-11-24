@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccountController extends AbstractController
 {
     #[Route('/employee/{employeeId}/account/new', name: 'app_account_new')]
-    public function new(int $employeeId, Request $request, AccountManager $accountManager, EmployeeManager $employeeManager): Response
+    public function create(int $employeeId, Request $request, AccountManager $accountManager, EmployeeManager $employeeManager): Response
     {
         $accountModel = new AccountTypeModel(null, null, null);
 

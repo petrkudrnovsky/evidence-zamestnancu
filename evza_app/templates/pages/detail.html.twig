@@ -10,8 +10,13 @@
         <article class="employee-detail-container">
             <section>
                 <div class="detail-img__container">
-                    <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" width="100px"
-                        alt="Profilová fotka zaměstnance {{ user.firstName }} {{ user.secondName }}" />
+                    {% if user.profilePhotoFilename %}
+                        <img src="{{ asset('uploads/' ~ user.profilePhotoFilename) }}" width="100px"
+                             alt="Profilová fotka zaměstnance {{ user.firstName }} {{ user.secondName }}" />
+                    {% else %}
+                        <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" width="100px"
+                             alt="Není vložena fotografie zaměstnance {{ user.firstName }} {{ user.secondName }}" />
+                    {% endif %}
                 </div>
             </section>
             <article class="employee-detail-info">
@@ -50,7 +55,7 @@
                     </h2>
                 </section>
                 <section>
-                    <h2>Poznámka</h2>
+                    <h2>Poznámka:</h2>
                     {% if user.note %}
                         <p>{{ user.note }}</p>
                     {% else %}
@@ -59,6 +64,8 @@
                 </section>
                 <section>
                     <a href="{{ path('app_employee_detail_accounts', {id: user.id}) }}" class="button">Zobrazit účty zaměstnance</a>
+                    <a href="{{ path('app_employee_edit', {id: user.id}) }}" class="button">Editovat profil</a>
+                    <a href="{{ path('app_employee_delete', {id: user.id}) }}" class="button">Smazat profil</a>
                 </section>
             </article>
         </article>
