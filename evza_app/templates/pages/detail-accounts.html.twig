@@ -15,7 +15,7 @@
                 <li>
                     <h3>Název účtu: {{ account.name }}</h3>
                     <dl>
-                        <dt>Typ účtu</dt>
+                        <dt>Typ účtu:</dt>
                         {% if account.expiration %}
                             <dd>Dočasný</dd>
                         {% else %}
@@ -28,6 +28,8 @@
                             <dd>Bez expirace</dd>
                         {% endif %}
                     </dl>
+                    <a href="{{ path('app_account_edit', {employeeId: user.id, accountId: account.id}) }}">Upravit účet</a>
+                    <a href="{{ path('app_account_delete', {employeeId: user.id, accountId: account.id}) }}">Odstranit účet</a>
                 </li>
             {% endfor %}
         </ul>
