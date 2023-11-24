@@ -31,7 +31,6 @@ class AccountType extends AbstractType
             ->add('save', SubmitType::class, [
                 'label' => 'Uložit',
             ])
-
         ;
     }
 

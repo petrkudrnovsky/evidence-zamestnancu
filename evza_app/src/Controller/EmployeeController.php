@@ -44,7 +44,7 @@ class EmployeeController extends AbstractController
      * @return Response
      */
     #[Route('/employee/{id}', name: 'app_employee_detail')]
-    public function showUserDetail(int $id, EmployeeRepository $repository): Response
+    public function showEmployeeDetail(int $id, EmployeeRepository $repository): Response
     {
         $user = $repository->find($id);
 
@@ -66,5 +66,10 @@ class EmployeeController extends AbstractController
         return $this->render('pages/detail-accounts.html.twig', [
             'user' => $user
         ]);
+    }
+
+    public function create(): Response
+    {
+
     }
 }
