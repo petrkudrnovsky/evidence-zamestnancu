@@ -34,9 +34,13 @@ class EmployeeManager
             $employee = $model->toEntity(null);
         }
 
+        return $this->saveToDatabase($employee);
+    }
+
+    public function saveToDatabase(Employee $employee): Employee
+    {
         $this->em->persist($employee);
         $this->em->flush();
-
         return $employee;
     }
 

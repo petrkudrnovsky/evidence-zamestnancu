@@ -1,6 +1,9 @@
 ###> IDE files ###
 .idea
 
+###> Uploaded files ###
+evza_app/public/uploads/
+
 ###> GIT files in evza_app project ###
 evza_app/.git
 evza_app/.gitignore
