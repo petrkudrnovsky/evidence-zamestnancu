@@ -7,6 +7,7 @@ use App\Form\EmployeeType;
 use App\Form\Model\EmployeeTypeModel;
 use App\Repository\EmployeeRepository;
 use App\Service\Employee\EmployeeManager;
+use App\Service\FileManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,7 +62,7 @@ class EmployeeController extends AbstractController
     }
 
     #[Route('/employee/create', name: 'app_employee_create')]
-    public function create(Request $request, EmployeeManager $employeeManager): Response
+    public function create(Request $request, EmployeeManager $employeeManager, FileManager $fileManager): Response
     {
         $employeeModel = new EmployeeTypeModel(null, null, null, null, null, new ArrayCollection(), null, null);
 
@@ -74,21 +75,9 @@ class EmployeeController extends AbstractController
             /** @var UploadedFile $profilePhotoFile */
             $profilePhotoFile = $form['profilePhoto']->getData();
 
-            if ($profilePhotoFile) {
-                $originalFilename = pathinfo($profilePhotoFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $filledEmployeeModel->profilePhotoFilename = $safeFilename.'-'.uniqid().'.'.$profilePhotoFile->guessExtension();
-
-                try {
-                    $profilePhotoFile->move(
-                        $this->getParameter('profile_photo_directory'),
-                        $filledEmployeeModel->profilePhotoFilename
-                    );
-                } catch (FileException $e) {
-                    $filledEmployeeModel->profilePhotoFilename = null;
-                }
+            if($profilePhotoFile != null) {
+                $filledEmployeeModel->profilePhotoFilename = $fileManager->uploadImage($profilePhotoFile);
             }
-
             $newEmployee = $employeeManager->saveModelToDatabase($filledEmployeeModel, null);
 
             return $this->redirectToRoute('app_employee_detail', ['id' => $newEmployee->id]);
@@ -99,10 +88,38 @@ class EmployeeController extends AbstractController
         ]);
     }
 
-    #[Route('/employee/{id}/edit', name: 'app_employee_edit')]
-    public function edit(int $employeeId): Response
+    #[Route('/employee/{employeeId}/edit', name: 'app_employee_edit')]
+    public function edit(int $employeeId, Request $request, EmployeeManager $employeeManager, FileManager $fileManager): Response
     {
+        $employeeModel = $employeeManager->getModelById($employeeId);
+        $form = $this->createForm(EmployeeType::class, $employeeModel);
 
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var EmployeeTypeModel $filledEmployeeModel */
+            $filledEmployeeModel = $form->getData();
+            /** @var UploadedFile $profilePhotoFile */
+            $profilePhotoFile = $form['profilePhoto']->getData();
+
+            if($profilePhotoFile != null) {
+                $filledEmployeeModel->profilePhotoFilename = $fileManager->uploadImage($profilePhotoFile);
+            }
+            $editedEmployee = $employeeManager->saveModelToDatabase($filledEmployeeModel, $employeeId);
+
+            return $this->redirectToRoute('app_employee_detail', ['id' => $editedEmployee->id]);
+        }
+
+        return $this->render('pages/employee/employee-form.html.twig', [
+            'form' => $form,
+            'heading' => 'Editovat zaměstance'
+        ]);
+    }
+
+    #[Route('/employee/{employeeId}/delete', name: 'app_employee_delete')]
+    public function delete(int $employeeId, EmployeeManager $employeeManager): Response
+    {
+        $employeeManager->deleteEmployee($employeeId);
+        return $this->redirectToRoute('app_employees_index');
     }
 
     /**

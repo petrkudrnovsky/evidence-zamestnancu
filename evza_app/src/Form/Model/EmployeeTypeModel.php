@@ -3,7 +3,7 @@
 namespace App\Form\Model;
 
 use App\Entity\Employee;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class EmployeeTypeModel
@@ -17,7 +17,7 @@ class EmployeeTypeModel
         #[Assert\Email]
         public ?string $email,
         public ?string $note,
-        public ArrayCollection $positions,
+        public Collection $positions,
         public ?bool $active,
         public ?string $profilePhotoFilename,
     )
@@ -41,5 +41,19 @@ class EmployeeTypeModel
         }
 
         return $employee;
+    }
+
+    public static function fromEntity(Employee $employee): self
+    {
+        return new self(
+            $employee->getFirstName(),
+            $employee->getSecondName(),
+            $employee->getPhoneNumber(),
+            $employee->getEmail(),
+            $employee->getNote(),
+            $employee->getPositions(),
+            $employee->isActive(),
+            $employee->getProfilePhotoFilename()
+        );
     }
 }

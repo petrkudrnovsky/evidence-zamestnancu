@@ -42,6 +42,14 @@ class EmployeeManager
 
     public function getModelById(int $employeeId): EmployeeTypeModel
     {
-        // to-do
+        $employee = $this->getEmployeeById($employeeId);
+        return EmployeeTypeModel::fromEntity($employee);
+    }
+
+    public function deleteEmployee(int $employeeId): void
+    {
+        $employee = $this->getEmployeeById($employeeId);
+        $this->em->remove($employee);
+        $this->em->flush();
     }
 }

@@ -64,8 +64,8 @@
                 </section>
                 <section>
                     <a href="{{ path('app_employee_detail_accounts', {id: user.id}) }}" class="button">Zobrazit účty zaměstnance</a>
-                    <a href="{{ path('app_employee_edit', {id: user.id}) }}" class="button">Editovat profil</a>
-                    <a href="{{ path('app_employee_delete', {id: user.id}) }}" class="button">Smazat profil</a>
+                    <a href="{{ path('app_employee_edit', {employeeId: user.id}) }}" class="button">Editovat profil</a>
+                    <a href="{{ path('app_employee_delete', {employeeId: user.id}) }}" class="button">Smazat profil</a>
                 </section>
             </article>
         </article>
