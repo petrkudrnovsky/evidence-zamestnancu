@@ -2,16 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Employee;
 use App\Form\EmployeeType;
 use App\Form\Model\EmployeeTypeModel;
 use App\Repository\EmployeeRepository;
 use App\Service\Employee\EmployeeManager;
 use App\Service\FileManager;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -120,6 +117,24 @@ class EmployeeController extends AbstractController
     {
         $employeeManager->deleteEmployee($employeeId);
         return $this->redirectToRoute('app_employees_index');
+    }
+
+    #[Route('/employee/search', name: 'app_employee_search')]
+    public function search(Request $request, EmployeeRepository $repository): Response
+    {
+        $query = $request->query->get('query', '');
+
+        if(!empty($query)) {
+            $employees = $repository->findBySearchQuery($query);
+        }
+        else {
+            $employees = [];
+        }
+
+        return $this->render('pages/employee-search.html.twig', [
+            'employees' => $employees,
+            'queryTerm' => $query
+        ]);
     }
 
     /**
