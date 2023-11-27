@@ -12,12 +12,20 @@ class EmployeeInput
         public string $firstName,
         #[Assert\NotBlank]
         public string $secondName,
+        public string $phoneNumber,
+        public string $email,
+        public string $note,
+        public bool $active
     ) {}
 
     public function toEntity(Employee $employee = new Employee()): Employee
     {
         $employee->setFirstName($this->firstName);
         $employee->setSecondName($this->secondName);
+        $employee->setPhoneNumber($this->phoneNumber);
+        $employee->setEmail($this->email);
+        $employee->setNote($this->note);
+        $employee->setActive($this->active);
         return $employee;
     }
 }

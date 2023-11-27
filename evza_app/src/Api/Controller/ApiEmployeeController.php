@@ -4,6 +4,7 @@ namespace App\Api\Controller;
 
 use App\Api\Model\EmployeeInput;
 use App\Api\Model\EmployeeOutput;
+use App\Entity\Account;
 use App\Entity\Employee;
 use App\Repository\EmployeeRepository;
 use App\Service\Employee\EmployeeManager;
@@ -19,8 +20,10 @@ class ApiEmployeeController extends AbstractFOSRestController
     public function list(EmployeeRepository $repository): array
     {
         $employeeModels = array_map(
-            fn(Employee $employee) => EmployeeOutput::fromEntity($employee, [
-
+            fn(Employee $employee) => EmployeeOutput::fromEntity($employee, $this->getAccountUrls($employee), $this->getPositionNames($employee), [
+                'GET' => $this->generateUrl('api_employees_single', ['id' => $employee->getId()]),
+                'PUT' => $this->generateUrl('api_employees_edit', ['id' => $employee->getId()]),
+                'DELETE' => $this->generateUrl('api_employees_delete', ['id' => $employee->getId()])
             ]),
             $repository->findAll()
         );
@@ -33,31 +36,81 @@ class ApiEmployeeController extends AbstractFOSRestController
         ];
     }
 
+    private function getAccountUrls(Employee $employee): array
+    {
+        $accounts = [];
+        foreach($employee->getAccounts() as $account) {
+            $accounts[] = ['GET' =>$this->generateUrl('api_accounts_single', ['id' => $account->getId()])];
+        }
+
+        return $accounts;
+    }
+
+    private function getPositionNames(Employee $employee): array
+    {
+        $positions = [];
+        foreach ($employee->getPositions() as $position) {
+            $positions[] = $position->getName();
+        }
+
+        return $positions;
+    }
+
+    #[Rest\Get('/employees/{id}', name: 'api_employees_single', requirements: ['id' => '\d+'])]
+    #[Rest\View]
+    public function single(int $id, EmployeeManager $employeeManager): array
+    {
+        $employee = $employeeManager->getEmployeeById($id);
+        $employeeOutput = EmployeeOutput::fromEntity($employee, $this->getAccountUrls($employee), $this->getPositionNames($employee), [[
+            'PUT' => $this->generateUrl('api_employees_edit', ['id' => $employee->getId()]),
+            'DELETE' => $this->generateUrl('api_employees_delete', ['id' => $employee->getId()])
+        ]]);
+
+        return [
+            'entries' => $employeeOutput,
+            '_url' => [
+                'POST' => $this->generateUrl('api_employees_create'),
+            ]
+        ];
+    }
+
     #[Rest\Post('/employees', name: 'api_employees_create')]
     #[ParamConverter('employeeInput', converter: 'fos_rest.request_body')]
     #[Rest\View(statusCode: 201)]
-    public function create(Request $request, EmployeeInput $employeeInput, EmployeeManager $employeeManager): EmployeeOutput
+    public function create(EmployeeInput $employeeInput, EmployeeManager $employeeManager): EmployeeOutput
     {
         $employee = new Employee();
         $employee = $employeeInput->toEntity($employee);
         $employeeManager->saveToDatabase($employee);
 
-        return EmployeeOutput::fromEntity($employee, [
+        return EmployeeOutput::fromEntity($employee, $this->getAccountUrls($employee), $this->getPositionNames($employee), [
             'POST' => $this->generateUrl('api_employees_create'),
             'PUT' => $this->generateUrl('api_employees_edit', ['id' => $employee->getId()]),
             'DELETE' => $this->generateUrl('api_employees_delete', ['id' => $employee->getId()]),
         ]);
     }
 
-    #[Rest\Put('/employees', name: 'api_employees_edit')]
-    public function edit(): array
+    #[Rest\Put('/employees/{id}', name: 'api_employees_edit')]
+    #[ParamConverter('employeeInput', converter: 'fos_rest.request_body')]
+    #[Rest\View(statusCode: 201)]
+    public function edit(int $id, EmployeeInput $employeeInput, EmployeeManager $employeeManager): EmployeeOutput
     {
-        // to-do
+        $employee = $employeeManager->getEmployeeById($id);
+        $employee = $employeeInput->toEntity($employee);
+        $employeeManager->saveToDatabase($employee);
+
+        return EmployeeOutput::fromEntity($employee, $this->getAccountUrls($employee), $this->getPositionNames($employee), [
+            'POST' => $this->generateUrl('api_employees_create'),
+            'PUT' => $this->generateUrl('api_employees_edit', ['id' => $employee->getId()]),
+            'DELETE' => $this->generateUrl('api_employees_delete', ['id' => $employee->getId()]),
+        ]);
     }
 
-    #[Rest\Delete('/employees', name: 'api_employees_delete')]
-    public function delete(): array
+    #[Rest\Delete('/employees/{id}', name: 'api_employees_delete')]
+    #[Rest\View(statusCode: 204)]
+    public function delete(int $id, EmployeeManager $employeeManager): array
     {
-        // to-do
+        $employeeManager->deleteEmployee($id);
+        return [];
     }
 }
