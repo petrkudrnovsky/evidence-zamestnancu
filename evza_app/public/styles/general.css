@@ -4,6 +4,7 @@
 @import url("overview.css");
 @import url("employee-details.css");
 @import url("account-details.css");
+@import url("modal.css");
 
 * {
   box-sizing: border-box;
@@ -65,6 +66,10 @@ p {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.header-right {
+  text-align: right;
 }
 
 .logo img {
@@ -224,22 +229,8 @@ footer {
 @media screen and (min-width: 370px) {
   .employee-list-img__container {
     display: block;
-    height: 5rem;
-    width: 5rem;
-  }
-}
-
-@media screen and (min-width: 500px) {
-  .employee-list-img__container {
-    height: 6rem;
-    width: 6rem;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .employee-list-img__container {
-    height: 7rem;
-    width: 7rem;
+    height: 9rem;
+    width: 9rem;
   }
 }
 

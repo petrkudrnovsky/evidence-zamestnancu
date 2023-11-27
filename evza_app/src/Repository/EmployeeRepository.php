@@ -42,6 +42,7 @@ class EmployeeRepository extends ServiceEntityRepository
             ->leftJoin('e.positions', 'p')
             ->where('LOWER(e.firstName) LIKE :searchTerm')
             ->orWhere('LOWER(e.secondName) LIKE :searchTerm')
+            ->orWhere('LOWER(CONCAT(e.firstName, \' \', e.secondName)) LIKE :searchTerm')
             ->orWhere('LOWER(e.email) LIKE :searchTerm')
             ->orWhere('LOWER(e.phoneNumber) LIKE :searchTerm')
             ->orWhere('LOWER(a.name) LIKE :searchTerm')

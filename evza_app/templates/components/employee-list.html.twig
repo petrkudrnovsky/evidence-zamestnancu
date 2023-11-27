@@ -18,7 +18,7 @@
                     {% for position in employee.positions %}
                         <dd class="employee-list-position">{{ position.name }}</dd>
                     {% endfor %}
-                    <dt>E-mail:</dt>
+                    <dt>E-mail:</dt><br>
                     <dd>
                         {% if employee.email %}
                             <a href="mailto:{{ employee.email }}">{{ employee.email }}</a>

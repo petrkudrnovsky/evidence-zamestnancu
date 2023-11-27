@@ -52,6 +52,7 @@
                         {% else %}
                             <span class="status-label inactive">Neaktivní</span>
                         {% endif %}
+                        <img
                     </h2>
                 </section>
                 <section>
@@ -65,7 +66,17 @@
                 <section>
                     <a href="{{ path('app_employee_detail_accounts', {id: user.id}) }}" class="button">Zobrazit účty zaměstnance</a>
                     <a href="{{ path('app_employee_edit', {employeeId: user.id}) }}" class="button">Editovat profil</a>
-                    <a href="{{ path('app_employee_delete', {employeeId: user.id}) }}" class="button">Smazat profil</a>
+                    <div id="deleteConfirmationModal" class="evza-modal">
+                        <span class="bold-text mb-4">Pozor!</span>
+                        <p class="mb-2">Opravdu chcete smazat zaměstnance {{ user.firstName }} {{ user.secondName }}?</p>
+                        <button id="confirmDelete" class="button">Ano, smazat</button>
+                        <button id="cancelDelete" class="button">Zrušit</button>
+                    </div>
+                    <a href="{{ path('app_employee_delete', {employeeId: user.id}) }}"
+                       class="button" id="deleteButton"
+                       data-employee-id="{{ user.id }}"
+                       data-employee-index-url="{{ path('app_employees_index') }}"
+                    >Smazat profil</a>
                 </section>
             </article>
         </article>

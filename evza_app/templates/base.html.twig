@@ -13,6 +13,8 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts_body %}{% endblock %}
+        {% block javascript_body %}
+            <script src="{{ asset('scripts/app.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
