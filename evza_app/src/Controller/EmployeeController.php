@@ -9,6 +9,8 @@ use App\Service\Employee\EmployeeManager;
 use App\Service\FileManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -113,10 +115,30 @@ class EmployeeController extends AbstractController
     }
 
     #[Route('/employee/{employeeId}/delete', name: 'app_employee_delete')]
-    public function delete(int $employeeId, EmployeeManager $employeeManager): Response
+    public function delete(int $employeeId, Request $request, EmployeeManager $employeeManager): Response
     {
-        $employeeManager->deleteEmployee($employeeId);
-        return $this->redirectToRoute('app_employees_index');
+        $employee = $employeeManager->getEmployeeById($employeeId);
+
+        $form = $this->createDeleteForm($employeeId);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $employeeManager->deleteEmployee($employeeId);
+            return $this->redirectToRoute('app_employees_index');
+        }
+
+        return $this->render('pages/employee/employee-delete-form.html.twig', [
+            'delete_form' => $form->createView(),
+            'employee' => $employee
+        ]);
+    }
+
+    public function createDeleteForm(int $employeeId): FormInterface
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('app_employee_delete', ['employeeId' => $employeeId]))
+            ->add('confirm', SubmitType::class, ['label' => 'Ano'])
+            ->getForm();
     }
 
     #[Route('/employee/search', name: 'app_employee_search')]
