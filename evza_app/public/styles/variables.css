@@ -1,5 +1,6 @@
 :root {
   --primary-color: rgb(252, 177, 58);
+  --primary-color-dimmed: rgba(252, 177, 38, 0.2);
   --secondary-color: rgb(91, 56, 30);
   --link-color: rgb(229, 141, 0);
   --background-color: rgb(246, 214, 162);

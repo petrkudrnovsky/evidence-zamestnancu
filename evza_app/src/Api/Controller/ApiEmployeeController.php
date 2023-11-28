@@ -56,6 +56,14 @@ class ApiEmployeeController extends AbstractFOSRestController
         return $positions;
     }
 
+    #[Rest\Get('/employees/search/{query}', name: 'api_employees_search')]
+    #[Rest\View]
+    public function search(string $query, EmployeeManager $employeeManager): array
+    {
+        $employees = $employeeManager->getEmployeesBySearchTerm($query);
+        return array_map(fn(Employee $employee) => EmployeeOutput::fromEntity($employee, [], [], []), $employees);
+    }
+
     #[Rest\Get('/employees/{id}', name: 'api_employees_single', requirements: ['id' => '\d+'])]
     #[Rest\View]
     public function single(int $id, EmployeeManager $employeeManager): array

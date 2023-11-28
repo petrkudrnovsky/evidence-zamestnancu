@@ -52,6 +52,19 @@ class EmployeeRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findBySearchQueryEmployeeOnly(string $query): array
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->where('LOWER(e.firstName) LIKE :searchTerm')
+            ->orWhere('LOWER(e.secondName) LIKE :searchTerm')
+            ->orWhere('LOWER(CONCAT(e.firstName, \' \', e.secondName)) LIKE :searchTerm')
+            ->orWhere('LOWER(e.email) LIKE :searchTerm')
+            ->orWhere('LOWER(e.phoneNumber) LIKE :searchTerm')
+            ->setParameter('searchTerm', '%' . strtolower($query) . '%');
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Employee[] Returns an array of Employee objects
 //     */

@@ -69,7 +69,19 @@ p {
 }
 
 .header-right {
-  text-align: right;
+  display: none;
+}
+
+.show-menu {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: var(--header-height);
+  right: 0;
+  row-gap: 0.5rem;
+  background-color: var(--primary-color);
+  padding: 0 1rem 1rem 1rem;
+  border-radius: 0 0 0 1rem;
 }
 
 .logo img {
@@ -235,6 +247,18 @@ footer {
     display: block;
     height: 9rem;
     width: 9rem;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .header-right {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 0.7rem;
+  }
+
+  .menu-toggle {
+    display: none;
   }
 }
 

@@ -11,7 +11,7 @@
 }
 
 .search-section input[type="text"] {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.1rem;
   background-color: var(--background-color);
 }
 
@@ -39,4 +39,21 @@
 
 #newest-employees-list li:first-child {
   font-weight: 600;
+}
+
+.autocomplete-suggestions {
+  position: absolute;
+  border: 1px solid var(--text-primary-color);
+  border-radius: 0.5rem;
+  background: white;
+  z-index: 1000;
+}
+
+.autocomplete-suggestions div {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.autocomplete-suggestions div:hover {
+  background-color: #eee;
 }

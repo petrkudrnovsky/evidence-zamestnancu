@@ -26,6 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    new DropdownMenu('menuToggle', 'headerMenu');
+});
+
+class DropdownMenu {
+    constructor(toggleButtonId, menuId) {
+        this.menuToggle = document.getElementById(toggleButtonId);
+        this.menu = document.getElementById(menuId);
+
+        this.menuToggle.addEventListener('click', () => {
+            this.menu.classList.toggle('show-menu');
+        });
+    }
+}
+
 class InfoDialog {
     constructor(title, message) {
         this.title = title;
@@ -116,3 +131,64 @@ class ConfirmDialog {
         this.dialogElement.style.display = 'none';
     }
 }
+
+function autocomplete(inputElement, apiUrl) {
+    let timeoutId;
+
+    inputElement.addEventListener('input', function() {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            const searchTerm = inputElement.value.trim();
+            if (searchTerm) {
+                fetch(`${apiUrl}/${encodeURIComponent(searchTerm)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        showSuggestions(inputElement, data);
+                    });
+            }
+            else {
+                removeSuggestions('.autocomplete-suggestions');
+            }
+        }, 200);
+    });
+}
+
+function showSuggestions(inputElement, suggestions) {
+    let oldSuggestions = document.querySelector('.autocomplete-suggestions');
+    if (oldSuggestions) {
+        oldSuggestions.remove();
+    }
+
+    if (suggestions.length === 0) {
+        return;
+    }
+
+    let suggestionsDiv = document.createElement('div');
+    suggestionsDiv.classList.add('autocomplete-suggestions');
+
+    suggestions.forEach(suggestion => {
+        let div = document.createElement('div');
+        div.textContent = suggestion['first_name'] + ' ' + suggestion['second_name'];
+        div.onclick = function() {
+            inputElement.value = suggestion['first_name'] + ' ' + suggestion['second_name'];
+            suggestionsDiv.remove();
+        };
+        suggestionsDiv.appendChild(div);
+    });
+
+    inputElement.parentNode.insertBefore(suggestionsDiv, inputElement.nextSibling);
+}
+
+function removeSuggestions(className)
+{
+    let suggestionsDiv = document.querySelector(className);
+    if (suggestionsDiv) {
+        suggestionsDiv.remove();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('employee-search');
+    autocomplete(searchInput, '/api/employees/search');
+});

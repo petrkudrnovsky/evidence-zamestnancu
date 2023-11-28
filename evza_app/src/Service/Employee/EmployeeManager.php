@@ -25,6 +25,11 @@ class EmployeeManager
         return $employee;
     }
 
+    public function getEmployeesBySearchTerm($queryTerm): array
+    {
+        return $this->employeeRepository->findBySearchQueryEmployeeOnly($queryTerm);
+    }
+
     public function saveModelToDatabase(EmployeeTypeModel $model, ?int $employeeId): Employee
     {
         if($employeeId) {

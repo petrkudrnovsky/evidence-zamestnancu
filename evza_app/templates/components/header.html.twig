@@ -4,9 +4,10 @@
             <img src="{{ asset('assets/icons/person-team.svg') }}" alt="Logo aplikace">
             <span class="logo-text">Evza</span>
         </a>
-        <span class="header-right">
+        <button class="menu-toggle button" id="menuToggle">☰</button>
+        <div class="header-right" id="headerMenu">
             <a href="{{ path('app_employee_create') }}" class="button">Přidat nového zaměstnance</a>
             <a href="#" class="login-link button">Přihlášení</a>
-        </span>
+        </div>
     </nav>
 </header>
