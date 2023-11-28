@@ -56,7 +56,6 @@ p {
 }
 
 .main-header {
-  height: var(--header-height);
   background-color: var(--primary-color);
   padding: 0 0.5rem;
 }
@@ -70,6 +69,8 @@ p {
 
 .header-right {
   display: none;
+  justify-content: flex-end;
+  column-gap: 0.7rem;
 }
 
 .show-menu {
@@ -253,8 +254,6 @@ footer {
 @media screen and (min-width: 600px) {
   .header-right {
     display: flex;
-    justify-content: flex-end;
-    column-gap: 0.7rem;
   }
 
   .menu-toggle {
