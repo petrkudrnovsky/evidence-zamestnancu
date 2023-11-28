@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Position;
 use App\Form\EmployeeType;
 use App\Form\Model\EmployeeTypeModel;
 use App\Repository\EmployeeRepository;
+use App\Repository\PositionRepository;
 use App\Service\Employee\EmployeeManager;
 use App\Service\FileManager;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -23,12 +25,14 @@ class EmployeeController extends AbstractController
      * @return Response
      */
     #[Route('/', name: 'app_index')]
-    public function index(EmployeeRepository $repository): Response
+    public function index(EmployeeRepository $employeeRepository, PositionRepository $positionRepository): Response
     {
-        $newestEmployees = $repository->getNewestEmployees(5);
+        $newestEmployees = $employeeRepository->getNewestEmployees(5);
+        $positions = $positionRepository->findAll();
 
         return $this->render('pages/index.html.twig', [
-            'newest_employees' => $newestEmployees
+            'newest_employees' => $newestEmployees,
+            'positions' => $positions,
         ]);
     }
 
@@ -142,7 +146,7 @@ class EmployeeController extends AbstractController
     }
 
     #[Route('/employee/search', name: 'app_employee_search')]
-    public function search(Request $request, EmployeeRepository $repository): Response
+    public function search(Request $request, EmployeeRepository $repository, PositionRepository $positionRepository): Response
     {
         $query = $request->query->get('query', '');
 
@@ -155,7 +159,7 @@ class EmployeeController extends AbstractController
 
         return $this->render('pages/employee-search.html.twig', [
             'employees' => $employees,
-            'queryTerm' => $query
+            'queryTerm' => $query,
         ]);
     }
 

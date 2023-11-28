@@ -7,11 +7,7 @@
 
     <main>
         <h1>Výsledky vyhledávání: {{ queryTerm }}</h1>
-        <form action="{{ path('app_employee_search') }}" method="get" class="form">
-            <label for="employee-search" id="employee-search-label">Jméno zaměstnance: </label>
-            <input type="text" placeholder="Vyhledej zaměstnance..." id="employee-search" class="input-field" name="query" value="{{ queryTerm }}">
-            <input type="submit" value="Hledat" class="button">
-        </form>
+        {% include 'components/search-form.html.twig' with {'queryTerm': queryTerm} %}
         {% if employees|length == 0 %}
             <section>
                 <p>Nenašli jsme žádné výsledky.</p>

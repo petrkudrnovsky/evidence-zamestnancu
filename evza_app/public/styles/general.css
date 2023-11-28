@@ -220,6 +220,10 @@ footer {
   color: var(--text-secondary-color);
 }
 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
 @media screen and (min-width: 350px) {
   .search-section {
     padding: 2rem;
