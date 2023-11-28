@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EVZA - nový zaměstnanec{% endblock %}
+
+{% block body %}
+    {% include 'components/header.html.twig' %}
+    <main>
+        <h1>{{ heading }}</h1>
+        {{ form(form) }}
+    </main>
+    {% include 'components/footer.html.twig' %}
+{% endblock %}

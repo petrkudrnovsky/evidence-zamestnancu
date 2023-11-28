@@ -4,40 +4,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style/general.css">
+    <link rel="icon" href="assets/icons/person-team.svg" type="image/svg+xml">
     <title>EVZA - přehled zaměstnanců</title>
 </head>
 
 <body>
-    <header>
-        <span><a href="index.html">Aplikace EVZA</a></span>
-        <span><a href="#">Přihlášení</a></span>
+    <header class="main-header">
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="assets/icons/person-team.svg" alt="Logo aplikace">
+                <span class="logo-text">EVZA</span>
+            </a>
+            <a href="#" class="login-link button">Přihlášení</a>
+        </nav>
     </header>
     <main>
-        <h1>Přehled všech zaměstnanců</h1>
-        <ul>
+        <h1 class="">Přehled všech zaměstnanců</h1>
+        <ul id="employee-list">
             <li>
-                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" width="30px"
-                    alt="Profilová fotka Ivana Němého" />
-                <h2><a href="detail.html">Ivan Němý</a></h2>
-                <p>CEO of Acme</p>
-                <p>E-mail: <a href="mailto:ivan.nemy@acme.com">ivan.nemy@acme.com</a></p>
+                <div class="employee-list-img__container">
+                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
+                        alt="Profilová fotka Ivana Němého" />
+                </div>
+                <div class="employee-list-info">
+                    <h2><a href="detail.html">Ivan Němý</a></h2>
+                    <dl>
+                        <dt>Pozice:</dt>
+                        <dd>CEO of Acme</dd>
+                        <dt>E-mail:</dt>
+                        <dd><a href="mailto:lilith.houdek@acme.com">lilith.houdek@acme.com</a></dd>
+                    </dl>
+                </div>
             </li>
             <li>
-                <img src="https://www.perfocal.com/blog/content/images/size/w960/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg"
-                    width="30px" alt="Profilová fotka Lilith Houdkové" />
-                <h2><a href="detail.html">Lilith Houdková</a></h2>
-                <p>CFO of Acme</p>
-                <p>E-mail: <a href="mailto:lilith.houdek@acme.com">lilith.houdek@acme.com</a></p>
+                <div class="employee-list-img__container">
+                    <img src="https://www.perfocal.com/blog/content/images/size/w960/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg"
+                        alt="Profilová fotka Lilith Houdkové" />
+                </div>
+                <div class="employee-list-info">
+                    <h2><a href="detail.html">Lilith Houdková</a></h2>
+                    <dl>
+                        <dt>Pozice:</dt>
+                        <dd>CFO of Acme</dd>
+                        <dt>E-mail:</dt>
+                        <dd><a href="mailto:lilith.houdek@acme.com">lilith.houdek@acme.com</a></dd>
+                    </dl>
+                </div>
             </li>
             <li>
-                <img src="https://media.istockphoto.com/id/1300512215/photo/headshot-portrait-of-smiling-ethnic-businessman-in-office.jpg?s=612x612&w=0&k=20&c=QjebAlXBgee05B3rcLDAtOaMtmdLjtZ5Yg9IJoiy-VY="
-                    width="30px" alt="Profilová fotka Jana Blahoslaveného" />
-                <h2><a href="detail.html">Jan Blahoslavený</a></h2>
-                <p>Junior Web Developer</p>
-                <p>E-mail: <a href="mailto:honza.blahoslaveny@acme.com">honza.blahoslaveny@acme.com</a></p>
+                <div class="employee-list-img__container">
+                    <img src="https://media.istockphoto.com/id/1300512215/photo/headshot-portrait-of-smiling-ethnic-businessman-in-office.jpg?s=612x612&w=0&k=20&c=QjebAlXBgee05B3rcLDAtOaMtmdLjtZ5Yg9IJoiy-VY="
+                        alt="Profilová fotka Jana Blahoslaveného" />
+                </div>
+                <div class="employee-list-info">
+                    <h2><a href="detail.html">Jan Blahoslavený</a></h2>
+                    <dl>
+                        <dt>Pozice:</dt>
+                        <dd>Junion Web Developer</dd>
+                        <dt>E-mail:</dt>
+                        <dd><a href="mailto:lilith.houdek@acme.com">lilith.houdek@acme.com</a></dd>
+                    </dl>
+                </div>
             </li>
         </ul>
     </main>
+    <footer>
+        <section class="copyright-info">
+            Copyright &copy; Petr Kudrnovský (kudrnpe3) BI-TWA, ČVUT FIT <time datetime="2023">2023</time>
+        </section>
+    </footer>
 </body>
 
 </html>

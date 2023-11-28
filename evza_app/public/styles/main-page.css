@@ -1,0 +1,59 @@
+/* Main page (index) styles */
+
+.search-section {
+  background-color: var(--primary-color);
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.search-section input[type="text"] {
+  margin-bottom: 0.1rem;
+  background-color: var(--background-color);
+}
+
+.form {
+  margin: 0.5rem 0;
+}
+
+#employee-search-label {
+  display: none;
+}
+
+.input-field {
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px solid #000;
+}
+
+#newest-employees-list {
+  list-style-type: decimal-leading-zero;
+}
+
+#newest-employees-list li {
+  margin: 0.5rem 0 0.5rem 2rem;
+}
+
+#newest-employees-list li:first-child {
+  font-weight: 600;
+}
+
+.autocomplete-suggestions {
+  position: absolute;
+  border: 1px solid var(--text-primary-color);
+  border-radius: 0.5rem;
+  background: white;
+  z-index: 1000;
+}
+
+.autocomplete-suggestions div {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.autocomplete-suggestions div:hover {
+  background-color: #eee;
+}

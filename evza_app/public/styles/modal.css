@@ -1,0 +1,24 @@
+.evza-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--text-primary-color);
+    border-radius: 1rem;
+    padding: 30px;
+    background: var(--primary-color);
+    z-index: 1000;
+    display: none;
+}
+
+.evza-modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}

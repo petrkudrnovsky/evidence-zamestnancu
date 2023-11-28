@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EVZA - vyhledávání{% endblock %}
+
+{% block body %}
+    {% include 'components/header.html.twig' %}
+
+    <main>
+        <h1>Výsledky vyhledávání: {{ queryTerm }}</h1>
+        {% include 'components/search-form.html.twig' with {'queryTerm': queryTerm} %}
+        {% if employees|length == 0 %}
+            <section>
+                <p>Nenašli jsme žádné výsledky.</p>
+            </section>
+        {% else %}
+            {% include 'components/employee-list.html.twig' with {'employees': employees} %}
+        {% endif %}
+    </main>
+
+    {% include 'components/footer.html.twig' %}
+{% endblock %}

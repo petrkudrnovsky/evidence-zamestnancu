@@ -1,0 +1,33 @@
+<ul id="employee-list">
+    {% for employee in employees %}
+        <li>
+            <div class="employee-list-img__container">
+                {% if employee.profilePhotoFilename %}
+                    <img src="{{ asset('uploads/' ~ employee.profilePhotoFilename) }}" width="100px"
+                         alt="Profilová fotka zaměstnance {{ employee.firstName }} {{ employee.secondName }}" />
+                {% else %}
+                    <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" width="100px"
+                         alt="Není vložena fotografie zaměstnance {{ employee.firstName }} {{ employee.secondName }}" />
+                {% endif %}
+            </div>
+            <div class="employee-list-info">
+                <h2><a href="{{ path('app_employee_detail', {id: employee.id}) }}">{{ employee.firstName }} {{ employee.secondName }}</a></h2>
+                <dl>
+                    <dt>Pozice:</dt>
+                    <br>
+                    {% for position in employee.positions %}
+                        <dd class="employee-list-position">{{ position.name }}</dd>
+                    {% endfor %}
+                    <dt>E-mail:</dt><br>
+                    <dd>
+                        {% if employee.email %}
+                            <a href="mailto:{{ employee.email }}">{{ employee.email }}</a>
+                        {% else %}
+                            Není zadán
+                        {% endif %}
+                    </dd>
+                </dl>
+            </div>
+        </li>
+    {% endfor %}
+</ul>

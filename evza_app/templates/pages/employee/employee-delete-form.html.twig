@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EVZA - smazat zaměstnance{% endblock %}
+
+{% block body %}
+    {% include 'components/header.html.twig' %}
+    <main>
+        <h1>Opravdu chcete smazat zaměstnance {{ employee.firstName }} {{ employee.secondName }}?</h1>
+        {{ form_start(delete_form) }}
+            {{ form_widget(delete_form.confirm) }}
+            <a href="{{ path('app_employee_detail', {'id': employee.id}) }}" class="btn btn-secondary">Ne</a>
+        {{ form_end(delete_form) }}
+    </main>
+    {% include 'components/footer.html.twig' %}
+{% endblock %}

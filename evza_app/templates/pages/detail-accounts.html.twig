@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EVZA - detail účtů - {{ user.firstName }} {{ user.secondName }}{% endblock %}
+
+{% block body %}
+    {% include 'components/header.html.twig' %}
+
+    <main>
+        <h1>Detail účtů zaměstance - <strong class="bold-text">{{ user.firstName }} {{ user.secondName }}</strong></h1>
+        <a href="{{ path('app_employee_detail', {id: user.id}) }}" class="button detail-account-button">Zpět na detail zaměstance</a>
+        <a href="{{ path('app_account_new', {employeeId: user.id}) }}" class="button detail-account-button">Vytvořit nový účet</a>
+
+        <ul class="account-list">
+            {% for account in user.accounts %}
+                <li>
+                    <h3>Název účtu: {{ account.name }}</h3>
+                    <dl>
+                        <dt>Typ účtu:</dt>
+                        {% if account.expiration %}
+                            <dd>Dočasný</dd>
+                        {% else %}
+                            <dd>Permanentní</dd>
+                        {% endif %}
+                        <dt>Expirace:</dt>
+                        {% if account.expiration %}
+                            <dd>{{ account.expiration|date("d. m. Y") }}</dd>
+                        {% else %}
+                            <dd>Bez expirace</dd>
+                        {% endif %}
+                    </dl>
+                    <a href="{{ path('app_account_edit', {employeeId: user.id, accountId: account.id}) }}">Upravit účet</a>
+                    <a href="{{ path('app_account_delete', {employeeId: user.id, accountId: account.id}) }}">Odstranit účet</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    {% include 'components/footer.html.twig' %}
+{% endblock %}

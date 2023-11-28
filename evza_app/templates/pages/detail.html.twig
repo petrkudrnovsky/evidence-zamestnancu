@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EVZA - detail - {{ user.firstName }} {{ user.secondName }}{% endblock %}
+
+{% block body %}
+    {% include 'components/header.html.twig' %}
+
+    <main>
+        <h1>{{ user.firstName }} {{ user.secondName }}</h1>
+        <article class="employee-detail-container">
+            <section>
+                <div class="detail-img__container">
+                    {% if user.profilePhotoFilename %}
+                        <img src="{{ asset('uploads/' ~ user.profilePhotoFilename) }}" width="100px"
+                             alt="Profilová fotka zaměstnance {{ user.firstName }} {{ user.secondName }}" />
+                    {% else %}
+                        <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" width="100px"
+                             alt="Není vložena fotografie zaměstnance {{ user.firstName }} {{ user.secondName }}" />
+                    {% endif %}
+                </div>
+            </section>
+            <article class="employee-detail-info">
+                <section>
+                    <h2>Pozice:</h2>
+                    <ol class="general-list">
+                        {% for position in user.positions %}
+                            <li>{{ position.name }}</li>
+                        {% endfor %}
+                    </ol>
+                </section>
+                <section>
+                    <h2>Kontaktní údaje:</h2>
+                    <dl class="dl-with-icons">
+                        <dt>Telefon: </dt>
+                        {% if user.phoneNumber %}
+                            <dd><a href="tel:{{ user.phoneNumber }}" class="phone">{{ user.phoneNumber }}</a></dd>
+                        {% else %}
+                            <dd class="phone">Nezadáno</dd>
+                        {% endif %}
+                        <dt>E-mail: </dt>
+                        {% if user.email %}
+                            <dd><a href="mailto:{{ user.email }}" class="email">{{ user.email }}</a></dd>
+                        {% else %}
+                            <dd class="email">Nezadáno</dd>
+                        {% endif %}
+                    </dl>
+                </section>
+                <section>
+                    <h2>Status:
+                        {% if user.active %}
+                            <span class="status-label active">Aktivní</span>
+                        {% else %}
+                            <span class="status-label inactive">Neaktivní</span>
+                        {% endif %}
+                        <img
+                    </h2>
+                </section>
+                <section>
+                    <h2>Poznámka:</h2>
+                    {% if user.note %}
+                        <p>{{ user.note }}</p>
+                    {% else %}
+                        <p>Nezadáno</p>
+                    {% endif %}
+                </section>
+                <section>
+                    <a href="{{ path('app_employee_detail_accounts', {id: user.id}) }}" class="button">Zobrazit účty zaměstnance</a>
+                    <a href="{{ path('app_employee_edit', {employeeId: user.id}) }}" class="button">Editovat profil</a>
+                    <a href="{{ path('app_employee_delete', {employeeId: user.id}) }}"
+                       class="button" id="deleteButton"
+                       data-employee-id="{{ user.id }}"
+                       data-employee-name="{{ user.firstName }} {{ user.secondName }}"
+                       data-employee-index-url="{{ path('app_employees_index') }}"
+                    >Smazat profil</a>
+                </section>
+            </article>
+        </article>
+    </main>
+
+    {% include 'components/footer.html.twig' %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EVZA - přehled zaměstnanců{% endblock %}
+
+{% block body %}
+    {% include 'components/header.html.twig' %}
+
+    <main>
+        <h1>Přehled všech zaměstnanců</h1>
+        {% include 'components/employee-list.html.twig' with {'employees': employees} %}
+    </main>
+
+    {% include 'components/footer.html.twig' %}
+{% endblock %}

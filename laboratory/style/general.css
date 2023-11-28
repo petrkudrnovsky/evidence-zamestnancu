@@ -1,0 +1,244 @@
+@import url("reset.css");
+@import url("variables.css");
+@import url("main-page.css");
+@import url("overview.css");
+@import url("employee-details.css");
+@import url("account-details.css");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: 1em;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 4vw, 1.6rem);
+  margin-bottom: 0.3rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+main {
+  padding: 1rem;
+  flex: 1;
+}
+
+section {
+  margin: 1rem 0;
+}
+
+a {
+  color: var(--secondary-color);
+}
+
+a:hover {
+  color: var(--link-color);
+}
+
+p {
+  line-height: 1.2rem;
+}
+
+.main-header {
+  height: var(--header-height);
+  background-color: var(--primary-color);
+  padding: 0 0.5rem;
+}
+
+.main-header nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  margin-right: 0.5rem;
+  width: var(--header-height);
+  height: var(--header-height);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.button {
+  background-color: var(--secondary-color);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  color: var(--background-color);
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.button:hover {
+  color: var(--link-color);
+}
+
+footer {
+  background-color: var(--secondary-color);
+  color: var(--background-color);
+}
+
+.copyright-info {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.button-under-text {
+  margin-top: 0.5rem;
+}
+
+.detail-img__container {
+  height: 12rem;
+  width: 12rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.employee-list-img__container img,
+.detail-img__container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.employee-list-info dt,
+.account-list dt {
+  display: inline;
+}
+
+.employee-list-info dd,
+.account-list dd {
+  display: inline;
+  font-weight: 600;
+  line-height: 1.2rem;
+}
+
+.employee-list-info dd::after,
+.account-list dd::after {
+  content: "\A";
+  white-space: pre;
+}
+
+.phone::before {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-image: url("../assets/icons/phone-call.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.email::before {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-image: url("../assets/icons/mail.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.general-list {
+  list-style-type: disc;
+}
+
+.general-list li {
+  margin: 0.5rem 0 0.5rem 2rem;
+}
+
+.dl-with-icons dt {
+  display: none;
+}
+
+.dl-with-icons dd {
+  line-height: 1.2rem;
+}
+
+.bold-text {
+  font-weight: 600;
+}
+
+.detail-account-button {
+  margin: 1rem 0;
+}
+
+@media screen and (min-width: 350px) {
+  .search-section {
+    padding: 2rem;
+  }
+}
+
+@media screen and (min-width: 370px) {
+  .employee-list-img__container {
+    display: block;
+    height: 5rem;
+    width: 5rem;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .employee-list-img__container {
+    height: 6rem;
+    width: 6rem;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .employee-list-img__container {
+    height: 7rem;
+    width: 7rem;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .employee-detail-container {
+    display: flex;
+    flex-direction: row !important;
+    column-gap: 1rem;
+  }
+
+  .employee-detail-container .employee-detail-info {
+    background-color: var(--text-secondary-color);
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  main {
+    width: 1000px;
+    margin: auto;
+  }
+}
