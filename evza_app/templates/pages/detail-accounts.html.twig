@@ -10,6 +10,15 @@
         <a href="{{ path('app_employee_detail', {id: user.id}) }}" class="button detail-account-button">Zpět na detail zaměstance</a>
         <a href="{{ path('app_account_new', {employeeId: user.id}) }}" class="button detail-account-button">Vytvořit nový účet</a>
 
+        <hr>
+
+        <h2>Vytvořit nový účet:</h2>
+        {{ form_start(form, {'attr': {'id': 'accountCreateForm', 'data-employee-id':  user.id }}) }}
+            {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+        <hr>
+
         <ul class="account-list">
             {% for account in user.accounts %}
                 <li>

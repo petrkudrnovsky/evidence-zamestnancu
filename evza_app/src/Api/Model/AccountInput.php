@@ -11,7 +11,7 @@ class AccountInput
 {
     public function __construct(
         public string $name,
-        #[Type("DateTime<'Y-m-d H:i:s'>")]
+        #[Type("DateTime<'Y-m-d'>")]
         public ?DateTime $expiration,
         public int $employeeId
     ) {}

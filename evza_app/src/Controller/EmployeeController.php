@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Position;
+use App\Form\AccountType;
 use App\Form\EmployeeType;
+use App\Form\Model\AccountTypeModel;
 use App\Form\Model\EmployeeTypeModel;
 use App\Repository\EmployeeRepository;
 use App\Repository\PositionRepository;
+use App\Service\Account\AccountManager;
 use App\Service\Employee\EmployeeManager;
 use App\Service\FileManager;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -50,17 +53,34 @@ class EmployeeController extends AbstractController
     }
 
     /**
+     * @param Request $request
      * @param int $id ID of the employee
      * @param EmployeeRepository $repository
+     * @param EmployeeManager $employeeManager
+     * @param AccountManager $accountManager
      * @return Response
      */
     #[Route('/employee/{id}/accounts', name: 'app_employee_detail_accounts')]
-    public function showEmployeeAccounts(int $id, EmployeeRepository $repository): Response
+    public function showEmployeeAccounts(Request $request, int $id, EmployeeRepository $repository, EmployeeManager $employeeManager, AccountManager $accountManager): Response
     {
         $user = $repository->find($id);
 
+        $accountModel = new AccountTypeModel(null, null, null);
+
+        $form = $this->createForm(AccountType::class, $accountModel);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $filledAccountModel = $form->getData();
+            $employee = $employeeManager->getEmployeeById($id);
+            $accountManager->saveModelToDatabase($filledAccountModel, $employee, null);
+
+            return $this->redirectToRoute('app_employee_detail_accounts', ['id' => $id]);
+        }
+
         return $this->render('pages/detail-accounts.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'form' => $form
         ]);
     }
 
