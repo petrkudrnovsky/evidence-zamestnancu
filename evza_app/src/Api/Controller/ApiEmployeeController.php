@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ApiEmployeeController extends AbstractFOSRestController
 {
     #[Rest\Get('/employees', name: 'api_employees_list')]
-    #[Rest\View]
+    #[Rest\View(statusCode: 200)]
     public function list(EmployeeRepository $repository): array
     {
         $employeeModels = array_map(
@@ -57,7 +57,7 @@ class ApiEmployeeController extends AbstractFOSRestController
     }
 
     #[Rest\Get('/employees/search/{query}', name: 'api_employees_search')]
-    #[Rest\View]
+    #[Rest\View(statusCode: 200)]
     public function search(string $query, EmployeeManager $employeeManager): array
     {
         $employees = $employeeManager->getEmployeesBySearchTerm($query);
@@ -65,7 +65,7 @@ class ApiEmployeeController extends AbstractFOSRestController
     }
 
     #[Rest\Get('/employees/{id}', name: 'api_employees_single', requirements: ['id' => '\d+'])]
-    #[Rest\View]
+    #[Rest\View(statusCode: 200)]
     public function single(int $id, EmployeeManager $employeeManager): array
     {
         $employee = $employeeManager->getEmployeeById($id);

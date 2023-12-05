@@ -49,6 +49,13 @@ class AccountManager
         return $account;
     }
 
+    public function saveToDatabase(Account $account): Account
+    {
+        $this->em->persist($account);
+        $this->em->flush();
+        return $account;
+    }
+
     public function getModelById(int $accountId): AccountTypeModel
     {
         $account = $this->getAccountById($accountId);
